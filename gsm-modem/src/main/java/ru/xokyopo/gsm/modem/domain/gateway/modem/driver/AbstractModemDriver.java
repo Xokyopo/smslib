@@ -7,10 +7,10 @@ import org.smslib.Service;
 import org.smslib.core.Capabilities;
 import org.smslib.core.Capabilities.Caps;
 import org.smslib.helper.Common;
-import org.smslib.message.MsIsdn;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.DeviceInformation.Modes;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.Modem;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.ModemResponse;
+import ru.xokyopo.gsm.modem.entity.MsIsdn;
 
 import java.io.*;
 import java.util.Properties;

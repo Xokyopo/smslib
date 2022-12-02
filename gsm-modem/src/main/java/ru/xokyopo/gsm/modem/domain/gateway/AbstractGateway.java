@@ -8,13 +8,13 @@ import org.smslib.core.Capabilities;
 import org.smslib.core.Coverage;
 import org.smslib.core.CreditBalance;
 import org.smslib.core.Statistics;
-import org.smslib.message.DeliveryReportMessage.DeliveryStatus;
-import org.smslib.message.InboundMessage;
-import org.smslib.message.MsIsdn;
-import org.smslib.message.OutboundMessage;
 import org.smslib.queue.DefaultOutboundQueue;
 import org.smslib.queue.IOutboundQueue;
 import org.smslib.threading.GatewayMessageDispatcher;
+import ru.xokyopo.gsm.modem.entity.DeliveryReportMessage;
+import ru.xokyopo.gsm.modem.entity.InboundMessage;
+import ru.xokyopo.gsm.modem.entity.MsIsdn;
+import ru.xokyopo.gsm.modem.entity.OutboundMessage;
 
 import java.util.Random;
 import java.util.concurrent.Semaphore;
@@ -295,32 +295,24 @@ public abstract class AbstractGateway
 		}
 	}
 
-	final public DeliveryStatus queryDeliveryStatus(OutboundMessage message) throws Exception
-	{
+	final public DeliveryReportMessage.DeliveryStatus queryDeliveryStatus(OutboundMessage message) throws Exception {
 		boolean acquiredLock = false;
-		try
-		{
+		try {
 			this.concurrency.acquire();
 			acquiredLock = true;
 			return _queryDeliveryStatus(message.getOperatorMessageIds().get(0));
-		}
-		finally
-		{
+		} finally {
 			if (acquiredLock) this.concurrency.release();
 		}
 	}
 
-	final public DeliveryStatus queryDeliveryStatus(String operatorMessageId) throws Exception
-	{
+	final public DeliveryReportMessage.DeliveryStatus queryDeliveryStatus(String operatorMessageId) throws Exception {
 		boolean acquiredLock = false;
-		try
-		{
+		try {
 			this.concurrency.acquire();
 			acquiredLock = true;
 			return _queryDeliveryStatus(operatorMessageId);
-		}
-		finally
-		{
+		} finally {
 			if (acquiredLock) this.concurrency.release();
 		}
 	}
@@ -374,7 +366,7 @@ public abstract class AbstractGateway
 
 	abstract protected boolean _delete(InboundMessage message) throws Exception;
 
-	abstract protected DeliveryStatus _queryDeliveryStatus(String operatorMessageId) throws Exception;
+	abstract protected DeliveryReportMessage.DeliveryStatus _queryDeliveryStatus(String operatorMessageId) throws Exception;
 
 	abstract protected CreditBalance _queryCreditBalance() throws Exception;
 

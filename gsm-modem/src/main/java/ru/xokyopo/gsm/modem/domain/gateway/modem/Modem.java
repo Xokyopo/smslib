@@ -9,17 +9,14 @@ import org.smslib.core.Coverage;
 import org.smslib.core.CreditBalance;
 import org.smslib.gateway.modem.driver.IPModemDriver;
 import org.smslib.helper.Common;
-import org.smslib.message.DeliveryReportMessage.DeliveryStatus;
-import org.smslib.message.InboundMessage;
-import org.smslib.message.MsIsdn;
-import org.smslib.message.MsIsdn.Type;
-import org.smslib.message.OutboundMessage;
-import org.smslib.message.OutboundMessage.FailureCause;
-import org.smslib.message.OutboundMessage.SentStatus;
 import ru.xokyopo.gsm.modem.domain.gateway.AbstractGateway;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.DeviceInformation.Modes;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.driver.AbstractModemDriver;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.driver.SerialModemDriver;
+import ru.xokyopo.gsm.modem.entity.DeliveryReportMessage;
+import ru.xokyopo.gsm.modem.entity.InboundMessage;
+import ru.xokyopo.gsm.modem.entity.MsIsdn;
+import ru.xokyopo.gsm.modem.entity.OutboundMessage;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -165,52 +162,45 @@ public class Modem extends AbstractGateway
 				for (String pdu : pdus)
 				{
 					int j = pdu.length() / 2;
-					if (getSmscNumber() == null)
-					{
+					if (getSmscNumber() == null) {
 						// Do nothing on purpose!
-					}
-					else if (getSmscNumber().getType() == Type.Void) j--;
-					else
-					{
+					} else if (getSmscNumber().getType() == MsIsdn.Type.Void) j--;
+					else {
 						int smscNumberLen = getSmscNumber().getAddress().length();
 						if (smscNumberLen % 2 != 0) smscNumberLen++;
 						int smscLen = (2 + smscNumberLen) / 2;
 						j = j - smscLen - 1;
 					}
 					int refNo = this.modemDriver.atSendPDUMessage(j, pdu);
-					if (refNo >= 0)
-					{
+					if (refNo >= 0) {
 						message.setGatewayId(getGatewayId());
 						message.setSentDate(new Date());
 						message.getOperatorMessageIds().add(String.valueOf(refNo));
-						message.setSentStatus(SentStatus.Sent);
-						message.setFailureCause(FailureCause.None);
+						message.setSentStatus(OutboundMessage.SentStatus.Sent);
+						message.setFailureCause(OutboundMessage.FailureCause.None);
 					}
-					else
-					{
-						message.setSentStatus(SentStatus.Failed);
-						message.setFailureCause(FailureCause.GatewayFailure);
+					else {
+						message.setSentStatus(OutboundMessage.SentStatus.Failed);
+						message.setFailureCause(OutboundMessage.FailureCause.GatewayFailure);
 					}
 				}
 			}
 			else
 			{
 				int refNo = this.modemDriver.atSendTEXTMessage(message.getRecipientAddress().getAddress(), message.getPayload().getText());
-				if (refNo >= 0)
-				{
+				if (refNo >= 0) {
 					message.setGatewayId(getGatewayId());
 					message.setSentDate(new Date());
 					message.getOperatorMessageIds().add(String.valueOf(refNo));
-					message.setSentStatus(SentStatus.Sent);
-					message.setFailureCause(FailureCause.None);
+					message.setSentStatus(OutboundMessage.SentStatus.Sent);
+					message.setFailureCause(OutboundMessage.FailureCause.None);
 				}
-				else
-				{
-					message.setSentStatus(SentStatus.Failed);
-					message.setFailureCause(FailureCause.GatewayFailure);
+				else {
+					message.setSentStatus(OutboundMessage.SentStatus.Failed);
+					message.setFailureCause(OutboundMessage.FailureCause.GatewayFailure);
 				}
 			}
-			return (message.getSentStatus() == SentStatus.Sent);
+			return (message.getSentStatus() == OutboundMessage.SentStatus.Sent);
 		}
 	}
 
@@ -233,8 +223,7 @@ public class Modem extends AbstractGateway
 	}
 
 	@Override
-	protected DeliveryStatus _queryDeliveryStatus(String operatorMessageId)
-	{
+	protected DeliveryReportMessage.DeliveryStatus _queryDeliveryStatus(String operatorMessageId) {
 		throw new UnsupportedOperationException();
 	}
 

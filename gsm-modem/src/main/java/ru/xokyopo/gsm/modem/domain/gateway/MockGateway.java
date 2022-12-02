@@ -6,11 +6,9 @@ import org.smslib.core.Capabilities;
 import org.smslib.core.Capabilities.Caps;
 import org.smslib.core.Coverage;
 import org.smslib.core.CreditBalance;
-import org.smslib.message.DeliveryReportMessage.DeliveryStatus;
-import org.smslib.message.InboundMessage;
-import org.smslib.message.OutboundMessage;
-import org.smslib.message.OutboundMessage.FailureCause;
-import org.smslib.message.OutboundMessage.SentStatus;
+import ru.xokyopo.gsm.modem.entity.DeliveryReportMessage;
+import ru.xokyopo.gsm.modem.entity.InboundMessage;
+import ru.xokyopo.gsm.modem.entity.OutboundMessage;
 
 import java.io.IOException;
 import java.util.Date;
@@ -70,18 +68,16 @@ public class MockGateway extends AbstractGateway {
 		{
 			e.printStackTrace();
 		}
-		if (!shouldFail)
-		{
+		if (!shouldFail) {
 			message.setGatewayId(this.getGatewayId());
 			message.setSentDate(new Date());
 			message.getOperatorMessageIds().add(UUID.randomUUID().toString());
-			message.setSentStatus(SentStatus.Sent);
-			message.setFailureCause(FailureCause.None);
+			message.setSentStatus(OutboundMessage.SentStatus.Sent);
+			message.setFailureCause(OutboundMessage.FailureCause.None);
 		}
-		else
-		{
-			message.setSentStatus(SentStatus.Failed);
-			message.setFailureCause(FailureCause.GatewayFailure);
+		else {
+			message.setSentStatus(OutboundMessage.SentStatus.Failed);
+			message.setFailureCause(OutboundMessage.FailureCause.GatewayFailure);
 		}
 		if (failOperation()) throw new IOException("Dummy Failure!");
 		return (!shouldFail);
@@ -130,8 +126,7 @@ public class MockGateway extends AbstractGateway {
 	}
 
 	@Override
-	protected DeliveryStatus _queryDeliveryStatus(String operatorMessageId) throws IOException
-	{
+	protected DeliveryReportMessage.DeliveryStatus _queryDeliveryStatus(String operatorMessageId) throws IOException {
 		if (failOperation()) throw new IOException("Dummy Failure!");
 		return null;
 	}
