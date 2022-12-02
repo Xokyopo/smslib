@@ -38,5 +38,6 @@
 	</dependencies>
 	<modules>
 		<module>smslib</module>
-  </modules>
+		<module>gsm-modem</module>
+	</modules>
 </project>
