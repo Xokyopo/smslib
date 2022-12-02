@@ -1,13 +1,9 @@
 
-package org.smslib.gateway.modem.driver.serial;
+package ru.xokyopo.gsm.modem.domain.gateway.modem.driver.serial;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
+import java.lang.reflect.*;
 
 /**
  * An RS-232 serial communications port.

@@ -1,23 +1,13 @@
 
-package org.smslib.gateway.modem;
+package ru.xokyopo.gsm.modem.domain.gateway.modem;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.StringTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smslib.core.Capabilities;
 import org.smslib.core.Capabilities.Caps;
 import org.smslib.core.Coverage;
 import org.smslib.core.CreditBalance;
-import org.smslib.gateway.AbstractGateway;
-import org.smslib.gateway.modem.DeviceInformation.Modes;
-import org.smslib.gateway.modem.driver.AbstractModemDriver;
 import org.smslib.gateway.modem.driver.IPModemDriver;
-import org.smslib.gateway.modem.driver.SerialModemDriver;
 import org.smslib.helper.Common;
 import org.smslib.message.DeliveryReportMessage.DeliveryStatus;
 import org.smslib.message.InboundMessage;
@@ -26,6 +16,17 @@ import org.smslib.message.MsIsdn.Type;
 import org.smslib.message.OutboundMessage;
 import org.smslib.message.OutboundMessage.FailureCause;
 import org.smslib.message.OutboundMessage.SentStatus;
+import ru.xokyopo.gsm.modem.domain.gateway.AbstractGateway;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.DeviceInformation.Modes;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.driver.AbstractModemDriver;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.driver.SerialModemDriver;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class Modem extends AbstractGateway
 {

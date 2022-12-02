@@ -1,5 +1,5 @@
 
-package org.smslib.gateway.modem;
+package ru.xokyopo.gsm.modem.domain.gateway.modem;
 
 import java.util.Collection;
 import java.util.HashSet;

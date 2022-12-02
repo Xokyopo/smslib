@@ -1,13 +1,14 @@
 
-package org.smslib.gateway.modem.driver.serial;
+package ru.xokyopo.gsm.modem.domain.gateway.modem.driver.serial;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Vector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Communications port management.

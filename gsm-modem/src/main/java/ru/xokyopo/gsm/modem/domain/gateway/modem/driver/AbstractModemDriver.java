@@ -1,26 +1,23 @@
 
-package org.smslib.gateway.modem.driver;
+package ru.xokyopo.gsm.modem.domain.gateway.modem.driver;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.StringReader;
-import java.util.Properties;
-import java.util.StringTokenizer;
-import java.util.concurrent.TimeoutException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smslib.Service;
 import org.smslib.core.Capabilities;
 import org.smslib.core.Capabilities.Caps;
-import org.smslib.gateway.modem.DeviceInformation.Modes;
-import org.smslib.gateway.modem.Modem;
-import org.smslib.gateway.modem.ModemResponse;
 import org.smslib.helper.Common;
 import org.smslib.message.MsIsdn;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.DeviceInformation.Modes;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.Modem;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.ModemResponse;
+
+import java.io.*;
+import java.util.Properties;
+import java.util.StringTokenizer;
+import java.util.concurrent.TimeoutException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class AbstractModemDriver
 {

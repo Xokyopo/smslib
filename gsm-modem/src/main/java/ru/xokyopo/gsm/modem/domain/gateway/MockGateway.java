@@ -1,11 +1,6 @@
 
-package org.smslib.gateway;
+package ru.xokyopo.gsm.modem.domain.gateway;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.smslib.Service;
 import org.smslib.core.Capabilities;
 import org.smslib.core.Capabilities.Caps;
@@ -17,15 +12,20 @@ import org.smslib.message.OutboundMessage;
 import org.smslib.message.OutboundMessage.FailureCause;
 import org.smslib.message.OutboundMessage.SentStatus;
 
-public class MockGateway extends AbstractGateway
-{
-	private Thread thread;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
-	int delay;
+public class MockGateway extends AbstractGateway {
+    private Thread thread;
 
-	int failureRate;
+    int delay;
 
-	protected boolean running = true;
+    int failureRate;
+
+    protected boolean running = true;
 
 	public MockGateway(String gatewayId, String... parms)
 	{

@@ -1,14 +1,15 @@
 
-package org.smslib.gateway.modem.driver;
+package ru.xokyopo.gsm.modem.domain.gateway.modem.driver;
 
-import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.smslib.gateway.modem.Modem;
-import org.smslib.gateway.modem.driver.serial.CommPortIdentifier;
-import org.smslib.gateway.modem.driver.serial.SerialPort;
-import org.smslib.gateway.modem.driver.serial.SerialPortEvent;
-import org.smslib.gateway.modem.driver.serial.SerialPortEventListener;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.Modem;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.driver.serial.CommPortIdentifier;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.driver.serial.SerialPort;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.driver.serial.SerialPortEvent;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.driver.serial.SerialPortEventListener;
+
+import java.io.IOException;
 
 public class SerialModemDriver extends AbstractModemDriver implements SerialPortEventListener
 {

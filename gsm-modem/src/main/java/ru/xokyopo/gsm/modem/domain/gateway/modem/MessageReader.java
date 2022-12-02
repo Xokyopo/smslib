@@ -1,31 +1,20 @@
 
-package org.smslib.gateway.modem;
+package ru.xokyopo.gsm.modem.domain.gateway.modem;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
-import java.util.StringTokenizer;
-import org.ajwcc.pduUtils.gsm3040.Pdu;
-import org.ajwcc.pduUtils.gsm3040.PduParser;
-import org.ajwcc.pduUtils.gsm3040.PduUtils;
-import org.ajwcc.pduUtils.gsm3040.SmsDeliveryPdu;
-import org.ajwcc.pduUtils.gsm3040.SmsStatusReportPdu;
+import org.ajwcc.pduUtils.gsm3040.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smslib.Service;
 import org.smslib.core.Settings;
-import org.smslib.gateway.AbstractGateway.Status;
-import org.smslib.gateway.modem.DeviceInformation.Modes;
 import org.smslib.helper.Common;
-import org.smslib.message.DeliveryReportMessage;
-import org.smslib.message.InboundBinaryMessage;
-import org.smslib.message.InboundEncryptedMessage;
-import org.smslib.message.InboundMessage;
-import org.smslib.message.Payload;
+import org.smslib.message.*;
+import ru.xokyopo.gsm.modem.domain.gateway.AbstractGateway;
+import ru.xokyopo.gsm.modem.domain.gateway.modem.DeviceInformation.Modes;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.*;
 
 public class MessageReader extends Thread
 {
@@ -52,14 +41,10 @@ public class MessageReader extends Thread
 		logger.debug("Started!");
 		while (!this.shouldCancel)
 		{
-			if (this.modem.getStatus() == Status.Started)
-			{
-				try
-				{
-					synchronized (this.modem.getModemDriver()._LOCK_)
-					{
-						for (int i = 0; i < (this.modem.getModemDriver().getMemoryLocations().length() / 2); i++)
-						{
+			if (this.modem.getStatus() == AbstractGateway.Status.Started) {
+				try {
+					synchronized (this.modem.getModemDriver()._LOCK_) {
+						for (int i = 0; i < (this.modem.getModemDriver().getMemoryLocations().length() / 2); i++) {
 							String memLocation = this.modem.getModemDriver().getMemoryLocations().substring((i * 2), (i * 2) + 2);
 							String data = this.modem.getModemDriver().atGetMessages(memLocation).getResponseData();
 							if (data.length() > 0)

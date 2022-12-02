@@ -1,5 +1,5 @@
 
-package org.smslib.gateway.modem.driver.serial;
+package ru.xokyopo.gsm.modem.domain.gateway.modem.driver.serial;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
