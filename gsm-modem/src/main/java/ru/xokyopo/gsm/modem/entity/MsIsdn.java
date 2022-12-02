@@ -1,7 +1,7 @@
 
 package ru.xokyopo.gsm.modem.entity;
 
-import org.smslib.helper.Common;
+import ru.xokyopo.gsm.modem.util.Common;
 
 public class MsIsdn {
 	String address = null;

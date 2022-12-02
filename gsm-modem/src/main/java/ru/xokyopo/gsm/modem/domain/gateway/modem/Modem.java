@@ -7,8 +7,6 @@ import org.smslib.core.Capabilities;
 import org.smslib.core.Capabilities.Caps;
 import org.smslib.core.Coverage;
 import org.smslib.core.CreditBalance;
-import org.smslib.gateway.modem.driver.IPModemDriver;
-import org.smslib.helper.Common;
 import ru.xokyopo.gsm.modem.domain.gateway.AbstractGateway;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.DeviceInformation.Modes;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.driver.AbstractModemDriver;
@@ -17,6 +15,7 @@ import ru.xokyopo.gsm.modem.entity.DeliveryReportMessage;
 import ru.xokyopo.gsm.modem.entity.InboundMessage;
 import ru.xokyopo.gsm.modem.entity.MsIsdn;
 import ru.xokyopo.gsm.modem.entity.OutboundMessage;
+import ru.xokyopo.gsm.modem.util.Common;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -56,8 +55,7 @@ public class Modem extends AbstractGateway
 		caps.set(Caps.CanSplitMessages);
 		caps.set(Caps.CanRequestDeliveryStatus);
 		setCapabilities(caps);
-		if (isPortAnIpAddress(address)) this.modemDriver = new IPModemDriver(this, address, port);
-		else this.modemDriver = new SerialModemDriver(this, address, port);
+		this.modemDriver = new SerialModemDriver(this, address, port);
 		if (!Common.isNullOrEmpty(memoryLocations)) this.modemDriver.setMemoryLocations(memoryLocations);
 		this.simPin = simPin;
 		this.simPin2 = simPin2;

@@ -4,13 +4,12 @@ package ru.xokyopo.gsm.modem.domain.gateway.modem.driver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smslib.Service;
-import org.smslib.core.Capabilities;
-import org.smslib.core.Capabilities.Caps;
-import org.smslib.helper.Common;
+import ru.xokyopo.gsm.modem.core.Capabilities;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.DeviceInformation.Modes;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.Modem;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.ModemResponse;
 import ru.xokyopo.gsm.modem.entity.MsIsdn;
+import ru.xokyopo.gsm.modem.util.Common;
 
 import java.io.*;
 import java.util.Properties;
@@ -346,7 +345,7 @@ public abstract class AbstractModemDriver
 				if (atSetTEXTMode().isResponseOk())
 				{
 					Capabilities caps = new Capabilities();
-					caps.set(Caps.CanSendMessage);
+					caps.set(Capabilities.Caps.CanSendMessage);
 					this.modem.setCapabilities(caps);
 					this.modem.getDeviceInformation().setMode(Modes.TEXT);
 					ModemResponse encodings = atGetSupportedEncodings();

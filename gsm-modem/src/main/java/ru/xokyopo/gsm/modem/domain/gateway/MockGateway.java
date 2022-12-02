@@ -2,10 +2,9 @@
 package ru.xokyopo.gsm.modem.domain.gateway;
 
 import org.smslib.Service;
-import org.smslib.core.Capabilities;
-import org.smslib.core.Capabilities.Caps;
-import org.smslib.core.Coverage;
-import org.smslib.core.CreditBalance;
+import ru.xokyopo.gsm.modem.core.Capabilities;
+import ru.xokyopo.gsm.modem.core.Coverage;
+import ru.xokyopo.gsm.modem.core.CreditBalance;
 import ru.xokyopo.gsm.modem.entity.DeliveryReportMessage;
 import ru.xokyopo.gsm.modem.entity.InboundMessage;
 import ru.xokyopo.gsm.modem.entity.OutboundMessage;
@@ -34,7 +33,7 @@ public class MockGateway extends AbstractGateway {
 	{
 		super(1, 1, id, "Mock Gateway");
 		Capabilities caps = new Capabilities();
-		caps.set(Caps.CanSendMessage);
+		caps.set(Capabilities.Caps.CanSendMessage);
 		setCapabilities(caps);
 		this.failureRate = failureRate;
 		this.delay = delay;

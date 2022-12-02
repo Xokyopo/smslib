@@ -4,14 +4,14 @@ package ru.xokyopo.gsm.modem.domain.gateway.modem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smslib.Service;
-import org.smslib.core.Settings;
-import org.smslib.helper.Common;
+import ru.xokyopo.gsm.modem.core.Settings;
 import ru.xokyopo.gsm.modem.domain.gateway.AbstractGateway;
 import ru.xokyopo.gsm.modem.domain.gateway.modem.DeviceInformation.Modes;
 import ru.xokyopo.gsm.modem.entity.DeliveryReportMessage;
 import ru.xokyopo.gsm.modem.entity.InboundBinaryMessage;
 import ru.xokyopo.gsm.modem.entity.InboundMessage;
 import ru.xokyopo.gsm.modem.entity.Payload;
+import ru.xokyopo.gsm.modem.util.Common;
 import ru.xokyopo.gsm.modem.util.gsm3040.*;
 
 import java.io.BufferedReader;
@@ -98,7 +98,6 @@ public class MessageReader extends Thread
 				if (pdu.isBinary())
 				{
 					msg = new InboundBinaryMessage((SmsDeliveryPdu) pdu, memLocation, memIndex);
-					if (Service.getInstance().getKeyManager().getKey(msg.getOriginatorAddress()) != null) msg = new InboundEncryptedMessage((SmsDeliveryPdu) pdu, memLocation, memIndex);
 				}
 				else
 				{

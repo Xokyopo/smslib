@@ -1,7 +1,7 @@
 
 package ru.xokyopo.gsm.modem.entity;
 
-import org.smslib.helper.Common;
+import ru.xokyopo.gsm.modem.util.Common;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -182,13 +182,6 @@ public abstract class AbstractMessage implements Serializable {
 			b.append(String.format("Memory Storage Location: %s%n", ((InboundMessage) this).getMemLocation()));
 			b.append(String.format("Memory Index: %d%n", ((InboundMessage) this).getMemIndex()));
 			b.append(String.format("Memory MP Index: %s%n", ((InboundMessage) this).getMpMemIndex()));
-		}
-		if (this instanceof InboundEncryptedMessage) {
-			try {
-				b.append(String.format("Decrypted binary payload: %s%n", Common.bytesToString(((InboundEncryptedMessage) this).getDecryptedData())));
-			} catch (Exception e) {
-				b.append(String.format("Cannot decrypt, due to %s.", e.getMessage()));
-			}
 		}
 		if (this instanceof OutboundMessage) {
 			b.append(String.format("Sent Date: %s%n", (((OutboundMessage) this).getSentStatus() == OutboundMessage.SentStatus.Sent ? getSentDate() : "N/A")));
